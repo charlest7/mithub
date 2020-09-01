@@ -1,0 +1,186 @@
+{% extends 'web_base.html.twig' %}
+{% block body %}
+
+<div class="page-content condensed">
+    <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+    <div id="portlet-config" class="modal hide">
+        <div class="modal-header">
+            <button data-dismiss="modal" class="close" type="button"></button>
+            <h3>Widget Settings</h3>
+        </div>
+        <div class="modal-body"> Widget settings form goes here </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="content col-md-8">
+            <ul class="breadcrumb">
+            </ul>
+            <!-- <div class="page-title"> 
+                <h3>MITHUB - <span class="semi-bold">Image Analyzing</span></h3>
+            </div> -->
+            <div class="row-fluid">
+                <div class="span12">
+                    <div class="grid simple ">
+                        <div class="grid-title">
+                            <h4>Image Analyzing <span class="semi-bold"></span></h4>
+                            
+                            <!--
+                            <div class="tools">
+                                <a href="javascript:;" class="collapse"></a>
+                                <a href="#grid-config" data-toggle="modal" class="config"></a>
+                                <a href="javascript:;" class="reload"></a>
+                                <a href="javascript:;" class="remove"></a>
+                            </div>
+                            -->
+                        </div>
+                        <div class="grid-body ">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div>
+                                        <img src="{{img}}" style="width:50%;"/>
+                                    </div>
+                                </div> <!-- end card body-->
+                            </div> <!-- end card -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content col-md-4">
+            <div class="row-fluid">
+                <div class="span12">
+                    <div class="grid simple ">
+                        <div class="grid-title">
+                            <h4>Image Analyzing <span class="semi-bold"></span></h4>
+                            
+                            <!--
+                            <div class="tools">
+                                <a href="javascript:;" class="collapse"></a>
+                                <a href="#grid-config" data-toggle="modal" class="config"></a>
+                                <a href="javascript:;" class="reload"></a>
+                                <a href="javascript:;" class="remove"></a>
+                            </div>
+                            -->
+                        </div>
+                        <div class="grid-body ">
+                            <div class="card">
+                                    <div class="card-body">
+                                        <div>
+                                            <div class="btn-group m-b-10" data-toggle="buttons-checkbox">
+                                                <button type="button" class="btn btn-primary" id="faces-details-data">Face</button>
+                                                <button type="button" class="btn btn-primary active" id="text-details-data">Text</button>
+                                            </div>
+                                        </div>
+                                        <div id="text-details" style="display:none;">
+                                            {% if webs is null %}
+                                            <div>
+                                                <h5 style="display:inline-block">No Data</h5>
+                                            </div>
+                                            {% endif %}
+                                            {% if webs is not null %}
+                                                {% for web in webs %}
+                                                <div>
+                                                    <h5 style="display:inline-block">Description : </h5>
+                                                    <i style="display:inline-block">{{ web.description }}</i>
+                                                </div>
+                                                {% endfor %}
+                                            {% endif %}
+                                        </div>
+                                        <div id="faces-details">
+                                            {% if faces is null %}
+                                                <div>
+                                                    <h5 style="display:inline-block">No Data Faces</h5>
+                                                </div>
+                                            {% endif %}
+                                            {% if faces is not null %}
+                                                {% for face in faces %}
+
+                                                <div>
+                                                    <h5 style="display:inline-block">Joy : </h5>
+                                                    <i style="display:inline-block">{{ face.joy }}</i>
+                                                </div>
+                                                <div>
+                                                    <h5 style="display:inline-block">Sorrow : </h5>
+                                                    <i style="display:inline-block">{{ face.sorrow }}</i>
+                                                </div>
+                                                <div>
+                                                    <h5 style="display:inline-block">Anger : </h5>
+                                                    <i style="display:inline-block">{{ face.anger }}</i>
+                                                </div>
+                                                <div>
+                                                    <h5 style="display:inline-block">Surprise : </h5>
+                                                    <i style="display:inline-block">{{ face.surprised }}</i>
+                                                </div>
+                                                <div>
+                                                    <h5 style="display:inline-block">Blurred : </h5>
+                                                    <i style="display:inline-block">{{ face.blurred }}</i>
+                                                </div>
+                                                <div>
+                                                    <h5 style="display:inline-block">Headwear : </h5>
+                                                    <i style="display:inline-block">{{ face.headwear }}</i>
+                                                </div>
+                                                {% endfor %}
+                                            {% endif %}
+                                        </div>
+                                        
+                                    </div> <!-- end card body-->
+                                </div> <!-- end card -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+      
+    <!-- END CONTAINER -->
+    <script src="https://oneanalytics.github.io/assetsweb/plugins/pace/pace.min.js" type="text/javascript"></script>
+    <!-- BEGIN JS DEPENDECENCIES-->
+    <script src="https://oneanalytics.github.io/assetsweb/plugins/jquery/jquery-1.11.3.min.js" type="text/javascript"></script>
+    <script src="https://oneanalytics.github.io/assetsweb/plugins/bootstrapv3/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="https://oneanalytics.github.io/assetsweb/plugins/jquery-block-ui/jqueryblockui.min.js" type="text/javascript"></script>
+    <script src="https://oneanalytics.github.io/assetsweb/plugins/jquery-unveil/jquery.unveil.min.js" type="text/javascript"></script>
+    <script src="https://oneanalytics.github.io/assetsweb/plugins/jquery-scrollbar/jquery.scrollbar.min.js" type="text/javascript"></script>
+    <script src="https://oneanalytics.github.io/assetsweb/plugins/jquery-numberAnimate/jquery.animateNumbers.js" type="text/javascript"></script>
+    <script src="https://oneanalytics.github.io/assetsweb/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="https://oneanalytics.github.io/assetsweb/plugins/bootstrap-select2/select2.min.js" type="text/javascript"></script>
+    <!-- END CORE JS DEPENDECENCIES-->
+    <!-- BEGIN CORE TEMPLATE JS -->
+    <script src="https://oneanalytics.github.io/webarch/js/webarch.js" type="text/javascript"></script>
+    <script src="https://oneanalytics.github.io/assetsweb/js/chat.js" type="text/javascript"></script>
+    <!-- END CORE TEMPLATE JS -->
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <script src="https://oneanalytics.github.io/assetsweb/plugins/bootstrap-select2/select2.min.js" type="text/javascript"></script>
+    <script src="https://oneanalytics.github.io/assetsweb/plugins/jquery-datatable/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="https://oneanalytics.github.io/assetsweb/plugins/jquery-datatable/extra/js/dataTables.tableTools.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="https://oneanalytics.github.io/assetsweb/plugins/datatables-responsive/js/datatables.responsive.js"></script>
+    <script type="text/javascript" src="https://oneanalytics.github.io/assetsweb/plugins/datatables-responsive/js/lodash.min.js"></script>
+    <!-- END PAGE LEVEL JS INIT -->
+    <script src="https://oneanalytics.github.io/assetsweb/js/datatables.js" type="text/javascript"></script>
+    <!-- END JAVASCRIPTS -->
+  
+    <script>
+   $('document').ready(function(){
+        $("#faces-details-data").click(function(){
+            console.log("faces")
+            $("#faces-details").css("display","block");
+            $("#text-details").css("display","none");
+        })
+
+        $("#text-details-data").click(function(){
+            console.log("text")
+            $("#faces-details").css("display","none");
+            $("#text-details").css("display","block");
+        })
+
+    });
+
+
+</script>
+
+   
+  </body>
+</html>
+{% endblock %}

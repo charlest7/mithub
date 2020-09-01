@@ -1,0 +1,177 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+
+<title>Test</title>
+{% endblock %}
+{% block body %}
+
+            <!-- ============================================================== -->
+            <!-- Start Page Content here -->
+            <!-- ============================================================== -->
+            <div class="content-page">
+                <div class="content">
+                    <!-- Start Content-->
+                    <div class="container-fluid">
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box">
+                                    <div class="page-title-right">
+                                       
+                                    </div>
+                                    <h4 class="page-title">Image Analyze</h4>
+                                </div>
+                            </div>
+                        </div>     
+                        <!-- end page title --> 
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div>
+                                            <img src="{{img}}" style="max-width:100%;"/>
+                                        </div>
+                                        
+                                    </div> <!-- end card body-->
+                                </div> <!-- end card -->
+                            </div>
+                            <div class="col-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div>
+                                            <button type="button" data-toggle="modal" id="faces-details-data" class="btn btn-primary" style="margin-top:5px;margin-bottom:15px;border-radius:0px;">Face</button>
+                                            <button type="button" data-toggle="modal" id="text-details-data" class="btn btn-primary" style="margin-top:5px;margin-bottom:15px;border-radius:0px;">Text</button>
+
+                                        </div>
+                                        <div id="text-details" style="display:none;">
+                                            {% if webs is null %}
+                                            <div>
+                                                <h5 style="display:inline-block">No Data</h5>
+                                            </div>
+                                            {% endif %}
+                                            {% if webs is not null %}
+                                                {% for web in webs %}
+                                                <div>
+                                                    <h5 style="display:inline-block">Description : </h5>
+                                                    <i style="display:inline-block">{{ web.description }}</i>
+                                                </div>
+                                                {% endfor %}
+                                            {% endif %}
+                                        </div>
+                                        <div id="faces-details">
+                                            {% if faces is null %}
+                                                <div>
+                                                    <h5 style="display:inline-block">No Data Faces</h5>
+                                                </div>
+                                            {% endif %}
+                                            {% if faces is not null %}
+                                                {% for face in faces %}
+
+                                                <div>
+                                                    <h5 style="display:inline-block">Joy : </h5>
+                                                    <i style="display:inline-block">{{ face.joy }}</i>
+                                                </div>
+                                                <div>
+                                                    <h5 style="display:inline-block">Sorrow : </h5>
+                                                    <i style="display:inline-block">{{ face.sorrow }}</i>
+                                                </div>
+                                                <div>
+                                                    <h5 style="display:inline-block">Anger : </h5>
+                                                    <i style="display:inline-block">{{ face.anger }}</i>
+                                                </div>
+                                                <div>
+                                                    <h5 style="display:inline-block">Surprise : </h5>
+                                                    <i style="display:inline-block">{{ face.surprised }}</i>
+                                                </div>
+                                                <div>
+                                                    <h5 style="display:inline-block">Blurred : </h5>
+                                                    <i style="display:inline-block">{{ face.blurred }}</i>
+                                                </div>
+                                                <div>
+                                                    <h5 style="display:inline-block">Headwear : </h5>
+                                                    <i style="display:inline-block">{{ face.headwear }}</i>
+                                                </div>
+                                                {% endfor %}
+                                            {% endif %}
+                                        </div>
+                                        
+                                    </div> <!-- end card body-->
+                                </div> <!-- end card -->
+                            </div><!-- end col-->
+                        </div>
+                        <!-- end row-->
+                    </div> <!-- container -->
+                </div> <!-- content -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Page content -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- END wrapper -->
+{% block javascript %}
+    <!-- Vendor js -->
+    <script src="https://oneanalytics.github.io/assets/js/vendor.min.js"></script>
+
+    <!-- third party js -->
+    <script src="https://oneanalytics.github.io/assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="https://oneanalytics.github.io/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://oneanalytics.github.io/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="https://oneanalytics.github.io/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+    <script src="https://oneanalytics.github.io/assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="https://oneanalytics.github.io/assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+    <script src="https://oneanalytics.github.io/assets/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="https://oneanalytics.github.io/assets/libs/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="https://oneanalytics.github.io/assets/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="https://oneanalytics.github.io/assets/libs/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="https://oneanalytics.github.io/assets/libs/datatables.net-select/js/dataTables.select.min.js"></script>
+    <script src="https://oneanalytics.github.io/assets/libs/pdfmake/build/pdfmake.min.js"></script>
+    <script src="https://oneanalytics.github.ioassets/libs/pdfmake/build/vfs_fonts.js"></script>
+    <!-- third party js ends -->
+
+    <!-- Datatables init -->
+    <script src="https://oneanalytics.github.io/assets/js/pages/datatables.init.js"></script>
+
+    
+    <!-- App js -->
+    <script src="https://oneanalytics.github.io/assets/js/app.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/modernizr/modernizr-2.8.3.js"></script>
+    <script type="text/javascript" src="https://cdn-na.infragistics.com/igniteui/2020.1/latest/js/infragistics.core.js"></script>
+    <script type="text/javascript" src="https://cdn-na.infragistics.com/igniteui/2020.1/latest/js/infragistics.lob.js"></script>
+    <script type="text/javascript" src="https://cdn-na.infragistics.com/igniteui/2020.1/latest/js/modules/infragistics.ext_core.js"></script>
+    <script type="text/javascript" src="https://cdn-na.infragistics.com/igniteui/2020.1/latest/js/modules/infragistics.ext_collections.js"></script>
+    <script type="text/javascript" src="https://cdn-na.infragistics.com/igniteui/2020.1/latest/js/modules/infragistics.ext_text.js"></script>
+    <script type="text/javascript" src="https://cdn-na.infragistics.com/igniteui/2020.1/latest/js/modules/infragistics.ext_io.js"></script>
+    <script type="text/javascript" src="https://cdn-na.infragistics.com/igniteui/2020.1/latest/js/modules/infragistics.ext_ui.js"></script>
+    <script type="text/javascript" src="https://cdn-na.infragistics.com/igniteui/2020.1/latest/js/modules/infragistics.documents.core_core.js"></script>
+    <script type="text/javascript" src="https://cdn-na.infragistics.com/igniteui/2020.1/latest/js/modules/infragistics.ext_collectionsextended.js"></script>
+    <script type="text/javascript" src="https://cdn-na.infragistics.com/igniteui/2020.1/latest/js/modules/infragistics.excel_core.js"></script>
+    <script type="text/javascript" src="https://cdn-na.infragistics.com/igniteui/2020.1/latest/js/modules/infragistics.ext_threading.js"></script>
+    <script type="text/javascript" src="https://cdn-na.infragistics.com/igniteui/2020.1/latest/js/modules/infragistics.ext_web.js"></script>
+    <script type="text/javascript" src="https://cdn-na.infragistics.com/igniteui/2020.1/latest/js/modules/infragistics.xml.js"></script>
+    <script type="text/javascript" src="https://cdn-na.infragistics.com/igniteui/2020.1/latest/js/modules/infragistics.documents.core_openxml.js"></script>
+    <script type="text/javascript" src="https://cdn-na.infragistics.com/igniteui/2020.1/latest/js/modules/infragistics.excel_serialization_openxml.js"></script>
+
+    <script>
+    $('document').ready(function(){
+        $("#faces-details-data").click(function(){
+            console.log("faces")
+            $("#faces-details").css("display","block");
+            $("#text-details").css("display","none");
+        })
+
+        $("#text-details-data").click(function(){
+            console.log("text")
+            $("#faces-details").css("display","none");
+            $("#text-details").css("display","block");
+        })
+
+    });
+
+</script>
+   
+{% endblock %}
+
+        
+    
+</body>
+{% endblock %}

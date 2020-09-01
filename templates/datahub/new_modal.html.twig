@@ -1,0 +1,83 @@
+<div id="upload-data"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" class="modal fade text-left" style="display: none;" aria-hidden="true">
+    <div role="document" class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" >
+                <h3 id="exampleModalLabel" class="modal-title">Upload Data</h3>
+                <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
+            </div>
+            <div class="modal-body" id="modalclose" >
+                <div class="form-group">       
+                    <label for="devision" class="col-form-label">Devision</label>
+                    <select class="form-control" id="divisionTxt">
+                        <option value="">Select Division</option>
+                        <option value="marketing">Marketing</option>
+                        <option value="dataAnalyst">Data Analyst</option>
+                        <option value="gudang">Gudang</option>
+                    </select>
+                </div>
+                <div class="form-group">       
+                    <label for="recipient-devision" class="col-form-label">Data Type</label>
+                    <select class="form-control" id="dataTypeTxt">
+                            <option value="">Select Data Type</option>
+                            <option value="img">Image</option>
+                            <option value="xls">Excel</option>
+                            <option value="txt">Text</option>
+                    </select>
+                </div>
+                <div class="form-group row" id="form-upload">    
+                    <div class="col-sm-12" id="imageExcel">
+                        <input type="file" id="import-audience" accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>
+                        <div id="result"></div>
+                    </div>  
+                </div>
+                <form enctype="multipart/form-data" action="uploadImg" id="image-upload">
+                    <div class="form-group row">    
+                        <div class="col-sm-12">
+                            <input type="file" id="import-audiences" name="image" accept="image/*"/>
+                        </div>  
+                    </div>
+                    <div class="modal-footer" id="imageFooter">
+                        <button type="button" data-dismiss="modal" class="btn btn-secondary">Close</button>
+                        <button type="submit" value="Submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-body pr-4 pl-4 pt-0" id="txtArea">
+                    <div class="form-group row">       
+                        <div class="col-sm-4">Text</div>
+                        <div class="col-sm-8">
+                            <textarea class="form-control" id="txtTextArea" rows="5"></textarea>
+                        </div>
+                    </div>
+                </div>
+                
+            <div class="modal-footer" id="btnFooter">
+                <button type="button" data-dismiss="modal" class="btn btn-secondary">Close</button>
+                <button type="submit" value="Submit" class="btn btn-primary" id="btn-upload-audience">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="processing-data"  tabindex="-1" role="dialog" aria-labelledby="exampleLabel" class="modal fade text-left" style="display:none;" aria-hidden="true">
+    <div role="document" class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" >
+                <h3 id="processing-data-status" class="modal-title" style="font-weight:bold;">Upload Data Processing</h3>
+                <button id="processing-data-header-close" type="button" data-dismiss="modal" aria-label="Close" class="close" style="display:none;"><span aria-hidden="true">×</span></button>
+            </div>
+            <div class="modal-body" id="processing-body" >
+                <div class="form-group row" style="display:block;">
+                    <div class="col-sm-12 mb-3" style="text-align:center">
+                        <div id="processing-finish" style="width: 70px;height: 70px;margin-left: 40%;font-size: 50px;background-color: #0aa699;border-radius: 50%;display:none;"><i class="fa fa-check fa-6" aria-hidden="true" style="/* display:none; */color: white;"></i></div>
+                        <i id="processing-icon" class="fa fa-circle-o-notch fa-spin fa-3x fa-fw" style="color:#0aa699;"></i>
+                        <div id="processsing-percent" style="margin-top:20px;" ><h3>0 %</h3></div>
+                        <div id="upload-id" style="margin-top:20px;display:none;" ></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="processing-close" type="button" data-dismiss="modal" class="btn btn-secondary" style="display:none;">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

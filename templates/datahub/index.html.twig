@@ -1,0 +1,430 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+
+<title>Test</title>
+{% endblock %}
+{% block body %}
+
+            <!-- ============================================================== -->
+            <!-- Start Page Content here -->
+            <!-- ============================================================== -->
+            <div class="content-page">
+                <div class="content">
+                    <!-- Start Content-->
+                    <div class="container-fluid">
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box">
+                                    <div class="page-title-right">
+                                       
+                                    </div>
+                                    <h4 class="page-title">Hub</h4>
+                                </div>
+                            </div>
+                        </div>     
+                        <!-- end page title --> 
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div>
+                                            <button type="button" data-toggle="modal" data-target="#upload-data" class="btn btn-primary" style="margin-top:5px;margin-bottom:15px;">Upload</button>
+                                            <button type="button" data-toggle="modal" data-target="#query-data" class="btn btn-primary" style="margin-top:5px;margin-bottom:15px;">Query</button>
+                                        </div>
+                                        <table id="datatable-buttons" class="table table-striped dt-responsive nowrap w-100">
+                                            <thead>
+                                                <tr>
+                                                    <th>Upload Id</th>
+                                                    <th>Uploader</th>
+                                                    <th>Total Data</th>
+                                                    <th>Data Type</th>
+                                                    <th>Date</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for upload in uploads %}
+                                                <tr>
+                                                    {% if upload.datatype != 'image' %}
+                                                       <td><a href="/datahub/list_new?uploadId={{upload.uploadId}}">{{upload.uploadId}}</td>
+                                                    {% endif %}
+                                                    {% if upload.datatype == 'image' %}
+                                                       <td><a href="redirect_image?uploadId={{upload.uploadId}}">{{upload.uploadId}}</td>
+                                                    {% endif %}
+                                                    <td>{{upload.email}}</td>
+                                                    <td>{{upload.totalData}}</td>
+                                                    <td>{{upload.datatype}}</td>
+                                                    <td>{{upload.date}}</td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                        
+                                    </div> <!-- end card body-->
+                                </div> <!-- end card -->
+                            </div><!-- end col-->
+                        </div>
+                        <!-- end row-->
+                    </div> <!-- container -->
+                </div> <!-- content -->
+                {{ include('datahub/modal.html.twig') }}
+                <!-- Footer Start -->
+                <!-- <footer class="footer">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6">
+                                2015 - <script>document.write(new Date().getFullYear())</script> &copy; UBold theme by <a href="">Coderthemes</a> 
+                            </div>
+                            <div class="col-md-6">
+                                <div class="text-md-right footer-links d-none d-sm-block">
+                                    <a href="javascript:void(0);">About Us</a>
+                                    <a href="javascript:void(0);">Help</a>
+                                    <a href="javascript:void(0);">Contact Us</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </footer> -->
+                <!-- end Footer -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Page content -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- END wrapper -->
+
+
+
+        <!-- Right bar overlay-->
+        <div class="rightbar-overlay"></div>
+        <input type="text" id="uploadData" style="display:none;"></input>
+        <input type="text" id="headerData" style="display:none;"></input>
+         <input type="text" id="uniqueId" style="display:none;"></input>
+         <input type="text" id="current-batch" value="0" style="display:none;"></input>
+         
+
+
+{% block javascript %}
+    <!-- Vendor js -->
+    <script src="https://oneanalytics.github.io/assets/js/vendor.min.js"></script>
+
+    <!-- third party js -->
+    <script src="https://oneanalytics.github.io/assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="https://oneanalytics.github.io/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://oneanalytics.github.io/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="https://oneanalytics.github.io/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+    <script src="https://oneanalytics.github.io/assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="https://oneanalytics.github.io/assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+    <script src="https://oneanalytics.github.io/assets/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="https://oneanalytics.github.io/assets/libs/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="https://oneanalytics.github.io/assets/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="https://oneanalytics.github.io/assets/libs/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="https://oneanalytics.github.io/assets/libs/datatables.net-select/js/dataTables.select.min.js"></script>
+    <script src="https://oneanalytics.github.io/assets/libs/pdfmake/build/pdfmake.min.js"></script>
+    <script src="https://oneanalytics.github.ioassets/libs/pdfmake/build/vfs_fonts.js"></script>
+    <!-- third party js ends -->
+
+    <!-- Datatables init -->
+    <script src="https://oneanalytics.github.io/assets/js/pages/datatables.init.js"></script>
+
+    <!-- App js -->
+    <script src="https://oneanalytics.github.io/assets/js/app.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/modernizr/modernizr-2.8.3.js"></script>
+    <script type="text/javascript" src="https://cdn-na.infragistics.com/igniteui/2020.1/latest/js/infragistics.core.js"></script>
+    <script type="text/javascript" src="https://cdn-na.infragistics.com/igniteui/2020.1/latest/js/infragistics.lob.js"></script>
+    <script type="text/javascript" src="https://cdn-na.infragistics.com/igniteui/2020.1/latest/js/modules/infragistics.ext_core.js"></script>
+    <script type="text/javascript" src="https://cdn-na.infragistics.com/igniteui/2020.1/latest/js/modules/infragistics.ext_collections.js"></script>
+    <script type="text/javascript" src="https://cdn-na.infragistics.com/igniteui/2020.1/latest/js/modules/infragistics.ext_text.js"></script>
+    <script type="text/javascript" src="https://cdn-na.infragistics.com/igniteui/2020.1/latest/js/modules/infragistics.ext_io.js"></script>
+    <script type="text/javascript" src="https://cdn-na.infragistics.com/igniteui/2020.1/latest/js/modules/infragistics.ext_ui.js"></script>
+    <script type="text/javascript" src="https://cdn-na.infragistics.com/igniteui/2020.1/latest/js/modules/infragistics.documents.core_core.js"></script>
+    <script type="text/javascript" src="https://cdn-na.infragistics.com/igniteui/2020.1/latest/js/modules/infragistics.ext_collectionsextended.js"></script>
+    <script type="text/javascript" src="https://cdn-na.infragistics.com/igniteui/2020.1/latest/js/modules/infragistics.excel_core.js"></script>
+    <script type="text/javascript" src="https://cdn-na.infragistics.com/igniteui/2020.1/latest/js/modules/infragistics.ext_threading.js"></script>
+    <script type="text/javascript" src="https://cdn-na.infragistics.com/igniteui/2020.1/latest/js/modules/infragistics.ext_web.js"></script>
+    <script type="text/javascript" src="https://cdn-na.infragistics.com/igniteui/2020.1/latest/js/modules/infragistics.xml.js"></script>
+    <script type="text/javascript" src="https://cdn-na.infragistics.com/igniteui/2020.1/latest/js/modules/infragistics.documents.core_openxml.js"></script>
+    <script type="text/javascript" src="https://cdn-na.infragistics.com/igniteui/2020.1/latest/js/modules/infragistics.excel_serialization_openxml.js"></script>
+    <script>
+    $('document').ready(function(){
+        var clientId = '{{app.session.get('userId')}}';
+        var email = '{{app.session.get('email')}}'
+
+
+        $('#form-upload').hide();
+        $('#image-upload').hide();
+        $('#txtArea').hide();
+        $('#imageFooter').hide();
+
+        var flag = 0;
+
+        $("#dataTypeTxt").on("change", function(){
+            if($("#dataTypeTxt").val() == 'txt')
+            {
+                flag = 2;
+                $('#txtArea').show();
+                $('#btnFooter').show();
+                $('#form-upload').hide();
+                $('#image-upload').hide();
+                $('#imageFooter').hide();
+                $('#btnFooter').prepend('</div>');
+
+            }
+            else if ($("#dataTypeTxt").val() == 'img')
+            {
+                $('#txtArea').hide();
+                $('#btnFooter').hide();
+                $('#image-upload').show(); 
+                $('#form-upload').hide();
+                $('#imageFooter').show();
+            
+            }
+            else
+            {
+                $('#txtArea').hide();
+                $('#btnFooter').show();
+                $('#image-upload').hide(); 
+                $('#form-upload').show();
+                $('#imageFooter').hide();
+            }
+        });
+
+        var form = document.getElementById('image-upload');
+        form.onsubmit = function() {
+            var fileInput = document.getElementById('import-audiences');
+            var files = fileInput.files[0];
+            var formData = new FormData();
+            formData.append('files', files);
+            var xhr = new XMLHttpRequest();
+            // Add any event handlers here...
+            xhr.open('POST', form.getAttribute('action'), true);
+            xhr.send(formData);
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    data = xhr.response;
+                    console.log(data);
+
+                    window.location.href = "/datahub/redirect_image?uploadId="+data;
+                }
+            }        
+            return false; // To avoid actual submission of the form
+        }
+
+        $("#import-audience").on("change", function () {
+            $("#upload-id").css("display","none");
+            $("#btn-upload-audience").css("display","none");
+            var dataType = $("#dataTypeTxt").val();
+
+            excelFile = this.files[0];
+            console.log("Tes "+JSON.stringify(excelFile));
+            console.log("data type "+dataType);
+
+            if( dataType == 'xls'){
+                    var excelFile,
+                fileReader = new FileReader();
+                var n = Math.floor(Math.random() * 11);
+                var k = Math.floor(Math.random() * 1000000);
+                var m = String.fromCharCode(n) + k;
+                //$("#result").hide();
+                fileReader.onload = function (e) {
+                var buffer = new Uint8Array(fileReader.result);
+
+                $.ig.excel.Workbook.load(buffer, function (workbook) {
+                    //var column, row, newRow, cellValue, columnIndex, i,
+                    var worksheet = workbook.worksheets(0);
+                    var columnsNumber = 0;
+                    var data = [];
+                    var title = [];
+                    var worksheetRowsCount;
+                                    
+                    while (worksheet.rows(0).getCellValue(columnsNumber)) {
+                        columnsNumber++;
+                    }
+
+                    for (i = 0, worksheetRowsCount = worksheet.rows().count() ; i < worksheetRowsCount; i++) {
+                        var newRow = [];
+                        var titleRow = [];
+                        var row = worksheet.rows(i);
+
+                        if(i == 0){
+                            for (columnIndex = 0; columnIndex < columnsNumber; columnIndex++) {
+                                var cellValue = row.getCellText(columnIndex);
+                                titleRow.push(cellValue);
+                            }
+                            title.push(titleRow)
+                            
+                        }else{
+                            for (columnIndex = 0; columnIndex < columnsNumber; columnIndex++) {
+                                var cellValue = row.getCellText(columnIndex);
+                                newRow.push(cellValue);
+                            }
+                            data.push(newRow);
+                            
+                        }
+                                        
+                    }
+                    $("#uploadData").val(JSON.stringify(data));
+                    $("#headerData").val(JSON.stringify(title));
+                    $("#uniqueId").val(k);
+                    $("#btn-upload-audience").css("display","block");
+                    console.log("data "+data);
+                }, function (error) {
+                    $("#result").text("The excel file is corrupted.");
+                    $("#result").show(1000);
+                })      
+                }
+
+                if(this.files.length > 0) {
+                    excelFile = this.files[0];
+                    if (excelFile.type === "application/vnd.ms-excel" || excelFile.type === "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" || (excelFile.type === "" && (excelFile.name.endsWith("xls") || excelFile.name.endsWith("xlsx")))) {
+                        fileReader.readAsArrayBuffer(excelFile);
+                    } else {
+                        $("#result").text("The format of the file you have selected is not supported. Please select a valid Excel file ('.xls, *.xlsx').");
+                        $("#result").show(1000);
+                    }
+                }
+
+
+            }
+        
+        /*
+        
+            */
+        });
+
+        $("#btn-upload-audience").click(function(){
+            if (flag == 0 && flag != 2)
+            {
+                console.log("Test");
+                var data = $("#uploadData").val();
+                var objectData = JSON.parse(data);
+                var headerData = $("#headerData").val();
+                var objectHeaderData = JSON.parse(headerData);
+                console.log("Object data "+objectData);
+                console.log("Object data "+objectHeaderData);
+            }
+
+            readDataProcessing();
+
+        });
+
+      
+
+    });
+
+function readDataProcessing(){ 
+    var dataType = $("#dataTypeTxt").val();
+
+    if(dataType == "xls"){
+        var data = $("#uploadData").val();
+        var objectData = JSON.parse(data);
+        var dataPush = [];
+        var uniqueId = $("#uniqueId").val();
+        var headerData = $("#headerData").val();
+        var objectHeaderData = JSON.parse(headerData);
+
+        $('#processing-data').modal({
+            backdrop: 'static',
+        });
+
+        var batch = 0;
+        var moduloBatch = objectData.length%50;
+        var totalBatch = parseInt(objectData.length/50);
+        if(moduloBatch > 0){
+        totalBatch++;
+        }
+        saveUploadData(objectHeaderData, uniqueId, totalBatch, 0, "xls", "header", objectData.length);
+
+        for(var x=0;x<objectData.length;x++){
+            var currentValue = x+1; 
+            
+            if(currentValue % 50==0 || objectData.length == currentValue){
+                console.log("datapush "+dataPush);
+                batch++;
+                dataPush.push(objectData[x]);
+                if(objectData.length == currentValue){
+                    var statusBatch = 1;
+                    saveUploadData(dataPush, uniqueId, totalBatch, statusBatch, "", "field", objectData.length);
+
+                }else{
+                    var statusBatch = 0;
+                    saveUploadData(dataPush, uniqueId, totalBatch, statusBatch, "", "field", objectData.length);
+
+                }
+            //console.log("detail data "+JSON.stringify(dataPush));
+                
+                dataPush = [];
+            }else{
+                dataPush.push(objectData[x])
+            }
+        }
+    }else if(dataType == "txt"){
+        var dataText = $('#txtTextArea').val();
+        var data = [];
+        var array2 = [];
+        data.push(dataText);
+        array2.push(data);
+        var n = Math.floor(Math.random() * 11);
+        var uniqueId = Math.floor(Math.random() * 1000000);
+
+        saveUploadData(array2, uniqueId, 1, 1, "txt", "field", 1);
+
+        $('#processing-data').modal({
+            backdrop: 'static',
+        });
+
+    }
+   
+}
+
+function saveUploadData(upload, uniqueId, totalBatch, statusBatch, dataType, type, totalData ){
+    $.ajax({
+        url: "{{ path('datahub_upload') }}",
+        async: true,
+        type: "GET",
+        dataType: "json",
+        data: { "upload":upload, "uniqueId":uniqueId, "statusBatch":statusBatch, "type":type, "dataType":dataType, "totalData":totalData},	
+        contentType: "application/json"               
+    }).done(function (data) {
+        console.log("data "+data.message);
+        if(type != "header"){
+            var currentBatch = parseInt($("#current-batch").val());
+            var nextBatch = currentBatch+1;
+            var percentage = nextBatch/totalBatch*100;
+            var percent = percentage.toFixed(0);
+
+            console.log("Percent "+percent);
+            if(percent == 100){
+                $("#processing-data-status").empty();
+                $("#processing-data-status").text("Upload Data ");
+                $("#processsing-percent>h3").empty();
+                $("#processsing-percent>h3").text(percent+" %");
+                
+                $("#upload-id").css("display","block");
+                $("#upload-id>h3").empty();
+                $("#upload-id>h3").text(uniqueId);
+                $("#processing-close").css("display","block")
+
+            }else{
+                $("#processsing-percent>h3").empty();
+                $("#processsing-percent>h3").text(percent+" %");
+                console.log("percent uploading "+percent)
+
+            }
+            $("#current-batch").val(nextBatch);
+        }
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+            
+    });
+}
+
+
+</script>
+   
+{% endblock %}
+
+        
+    
+    </body>
+    {% endblock %}

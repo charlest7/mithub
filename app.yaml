@@ -1,0 +1,17 @@
+runtime: php74
+
+env_variables:
+  APP_ENV: prod
+  APP_SECRET: 810c3eace40d6f1c9de0be392a49d88f
+  DATABASE_URL: mysql://root:master@localhost?unix_socket=/cloudsql/query-project-285415:asia-southeast1:datahub;dbname=mitrahub
+
+handlers:
+  - url: /build
+    static_dir: public/build
+  - url: /bundles
+    static_dir: public/bundles
+
+  # Declare any media files in the public directory as static assets as well.
+  - url: /(.*\.(ico|txt|gif|png|jpg))$
+    static_files: public/\1
+    upload: public/.*\.(ico|txt|gif|png|jpg)$
